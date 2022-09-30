@@ -1,0 +1,15 @@
+from pymongo import MongoClient
+
+
+class Database:
+    def __init__(self, database, collection, dataset=None):
+        connectionString = "27017"
+        self.clusterConnection = pymongo.MongoClient(
+            connectionString,
+            # CASO OCORRA O ERRO [SSL_INVALID_CERTIFICATE]
+            tlsAllowInvalidCertificates=True
+        )
+        self.db = self.clusterConnection[database]
+        self.collection = self.db[collection]
+        if dataset:
+            self.dataset = dataset
